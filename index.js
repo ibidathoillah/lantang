@@ -9,6 +9,10 @@ const config = require('./config');
 const { Validate, Kurs} = require('./lib');
 const Model = require('./model');
 var ObjectId = require('mongodb').ObjectId; 
+
+
+
+
 /**
 		Middleware to All Route
 */
@@ -33,6 +37,9 @@ app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 */
 
 /* CRUD Users */
+
+
+
 app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
