@@ -310,15 +310,27 @@ app.post('/v1/login', (req, res) => {
 });
 
 app.post('/v1/register/', (req, res) => {
-	Model.Users.find({username:req.body.username, email:req.body.email}, function(err, user){
+	Model.Users.find({username:req.body.username}, function(err, user){
 		if (err) {
 			res.status(202).send({ status: 'error',  message: err.message.toString() })
 		}
-		else if(user.length==1){
-			res.status(200).send({status:'username/email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+		else if(user.length>0){
+			res.status(200).send({status:'username sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
 		}
 		else{
-			res.status(404).send({ status: 'error', message: '404 Not Found' });
+			Model.Users.find({email:req.body.email}, function(err, user){
+			if (err) {
+				res.status(202).send({ status: 'error',  message: err.message.toString() })
+			}
+			else if(user.length>0){
+				res.status(200).send({status:'email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+			}
+			
+			else{
+				res.status(404).send({ status: 'error', message: '404 Not Found' });
+			}
+		});
+		
 		}
 	});
 });
