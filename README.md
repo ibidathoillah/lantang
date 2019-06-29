@@ -1,4 +1,4 @@
-# Hope Payfazz Team loves my work :smile:
+# Lantang Project Wong Batang :smile:
 
 Bank BCA Kurs scrapper for the first step of payfazz recruitment process.
 
@@ -30,7 +30,7 @@ SET NODE_ENV=production
 
 
 ## Contributing
-Thank you StackOverflow, Google, MySelf, and Coffee :coffee: and Payfazz :smile:
+Thank you Raka, Akamal, Ibid, StackOverflow, Google, MySelf, and Coffee :coffee: and GOD :smile:
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
