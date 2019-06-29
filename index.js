@@ -9,6 +9,10 @@ const config = require('./config');
 const { Validate, Kurs} = require('./lib');
 const Model = require('./model');
 var ObjectId = require('mongodb').ObjectId; 
+
+
+
+
 /**
 		Middleware to All Route
 */
@@ -33,6 +37,9 @@ app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 */
 
 /* CRUD Users */
+
+
+
 app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
@@ -68,6 +75,11 @@ app.post('/v1/post/add', (req, res) => {
 			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
 	})
 });
+
+
+
+
+
 
 app.post('/v1/category/add', (req, res) => {
 
@@ -275,6 +287,8 @@ app.delete('/v1/user/:id', (req, res) => {
 			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
 	})
 });
+
+
 
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
