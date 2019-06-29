@@ -42,7 +42,7 @@ app.post('/v1/user/add', (req, res) => {
 			res.status(202).send({ status: 'error',  message: err.message.toString() })
 		}
 		else if(user.length>0){
-			res.status(200).send({status:'username sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+			res.status(200).send({status:'gagal', message:'username sudah digunakan'}); // The FIND request was fulfilled
 		}
 		else{
 			Model.Users.find({email:req.body.email}, function(err, user){
@@ -50,7 +50,7 @@ app.post('/v1/user/add', (req, res) => {
 				res.status(202).send({ status: 'error',  message: err.message.toString() })
 			}
 			else if(user.length>0){
-				res.status(200).send({status:'email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+				res.status(200).send({status:'gagal', message:'email sudah digunakan'}); // The FIND request was fulfilled
 			}
 			
 			else{
