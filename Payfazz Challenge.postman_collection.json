@@ -1,0 +1,203 @@
+{
+	"id": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+	"name": "Payfazz Challenge",
+	"description": "",
+	"order": [
+		"ad4ffe8f-8f63-3fb5-0158-abae7a0c5660",
+		"f8ed34a8-829e-28a9-9665-9a510b33dd07",
+		"3b2bc3ea-6363-08b8-d7a0-17cd39d0220f",
+		"f24860fc-5479-98e3-a6e8-b4e051991115",
+		"085e29d3-a7ad-0e3a-e50f-7dd6419cede7",
+		"cb6c961d-9c13-70fb-0d29-2e079bb8105f"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1556766654305,
+	"owner": "4064052",
+	"public": false,
+	"requests": [
+		{
+			"id": "085e29d3-a7ad-0e3a-e50f-7dd6419cede7",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:7000/api/kurs",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Add new record",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1556767792349,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n    \"symbol\": \"AAA\",\r\n    \"e_rate\": {\r\n        \"jual\": 1803.55,\r\n        \"beli\": 177355\r\n    },\r\n    \"tt_counter\": {\r\n        \"jual\": 1803.55,\r\n        \"beli\": 177355\r\n    },\r\n    \"bank_notes\": {\r\n        \"jual\": 1803.55,\r\n        \"beli\": 177355\r\n    },\r\n    \"date\": \"2018-05-16\"\r\n}"
+		},
+		{
+			"id": "3b2bc3ea-6363-08b8-d7a0-17cd39d0220f",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:7000/api/kurs?startdate=2019-04-30&enddate=2019-05-04",
+			"queryParams": [
+				{
+					"key": "startdate",
+					"value": "2019-04-30",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "enddate",
+					"value": "2019-05-04",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"data": null,
+			"dataMode": "params",
+			"name": "Listing all record by date",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1556767607170,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "ad4ffe8f-8f63-3fb5-0158-abae7a0c5660",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:7000/api/indexing",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"data": null,
+			"dataMode": "params",
+			"name": "Indexing",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1556766663518,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "cb6c961d-9c13-70fb-0d29-2e079bb8105f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:7000/api/kurs",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Update record by symbol and date",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1556767913173,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n    \"symbol\": \"AAA\",\r\n    \"e_rate\": {\r\n        \"jual\": 30000,\r\n        \"beli\": 40000\r\n    },\r\n    \"tt_counter\": {\r\n        \"jual\": 30000.55,\r\n        \"beli\": 177355\r\n    },\r\n    \"bank_notes\": {\r\n        \"jual\": 240.55,\r\n        \"beli\": 7444\r\n    },\r\n    \"date\": \"2018-05-16\"\r\n}"
+		},
+		{
+			"id": "f24860fc-5479-98e3-a6e8-b4e051991115",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:7000/api/kurs/USD?startdate=2019-04-30&enddate=2019-05-04",
+			"queryParams": [
+				{
+					"key": "startdate",
+					"value": "2019-04-30",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "enddate",
+					"value": "2019-05-04",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"data": null,
+			"dataMode": "params",
+			"name": "Listing specified currency by date",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1556767713035,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "f8ed34a8-829e-28a9-9665-9a510b33dd07",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:7000/api/kurs/2018-05-16",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1556767412264,
+			"name": "Delete by date",
+			"description": "",
+			"collectionId": "da3e3305-41e8-9b5c-1934-46288bbc3174",
+			"responses": []
+		}
+	]
+}
