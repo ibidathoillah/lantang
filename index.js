@@ -76,12 +76,12 @@ app.post('/v1/category/add', (req, res) => {
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
 			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
-	})
+	});
 });
 
-app.get('/v1/post/:post', (req, res) => {
+app.get('/v1/post/:id', (req, res) => {
 
-    Model.Comment.find({"post" : ObjectId(req.params.post)}, function (err, user) { 
+    Model.Comment.find({"id" : ObjectId(req.params.id)}, function (err, user) { 
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user)
