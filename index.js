@@ -251,15 +251,6 @@ app.delete('/v1/comment/:id', (req, res) => {
 	})
 });
 
-
-
-
-
-
-
-
-
-
 app.get('/v1/user/:id', (req, res) => {
 
     Model.Users.find({"_id" : ObjectId(req.params.id)}, function (err, user) { 
@@ -316,6 +307,20 @@ app.post('/v1/login', (req, res) => {
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
+});
+
+app.post('/v1/register/', (req, res) => {
+	Model.Users.find({username:req.body.username, email:req.body.email}, function(err, user){
+		if (err) {
+			res.status(202).send({ status: 'error',  message: err.message.toString() })
+		}
+		else if(user.length==1){
+			res.status(200).send({status:'username/email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+		}
+		else{
+			res.status(404).send({ status: 'error', message: '404 Not Found' });
+		}
+	});
 });
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
