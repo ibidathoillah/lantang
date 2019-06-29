@@ -116,7 +116,7 @@ app.post('/v1/category/add', (req, res) => {
 
 app.get('/v1/post/:id', (req, res) => {
 
-    Model.Comment.find({"id" : ObjectId(req.params.id)}, function (err, user) { 
+    Model.Post.find({"id" : ObjectId(req.params.id)}, function (err, user) { 
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user)
@@ -128,7 +128,7 @@ app.get('/v1/post/:id', (req, res) => {
 
 app.get('/v1/post/', (req, res) => {
 
-    Model.Comment.find({}, function (err, user) { 
+    Model.Post.find({}, function (err, user) { 
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user)
@@ -140,7 +140,7 @@ app.get('/v1/post/', (req, res) => {
 
 app.put('/v1/post/:id', (req, res) => {
 
-	Model.Comment.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
+	Model.Post.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
@@ -149,7 +149,7 @@ app.put('/v1/post/:id', (req, res) => {
 });
 
 app.delete('/v1/post/:id', (req, res) => {
-	Model.Comment.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
+	Model.Post.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 

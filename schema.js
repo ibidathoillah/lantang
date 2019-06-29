@@ -64,7 +64,7 @@ const AppSchema = {
 			"id_user":  { type: ObjectId, required: true },
 			"like":  { type: Array, required: true },
 			"comment":  { type: Array, required: true },
-			"date":  { type: Date, required: true }
+			"date":  { type: Date,default: new Date(), required: false }
 			
 		}, { versionKey: false }),
 
