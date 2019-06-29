@@ -8,10 +8,37 @@ const custom_env = require('custom-env').env(process.env.NODE_ENV || 'developmen
 const config = require('./config');
 const { Validate, Kurs} = require('./lib');
 const Model = require('./model');
+const cors = require('cors');
 var ObjectId = require('mongodb').ObjectId; 
 /**
 		Middleware to All Route
 */
+
+const allowedOrigins = [
+  'capacitor://localhost',
+  'ionic://localhost',
+  'http://localhost',
+  'http://localhost:3000',
+  'http://localhost:8080',
+  'http://localhost:8100'
+];
+
+// Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origin not allowed by CORS'));
+    }
+  }
+}
+
+// Enable preflight requests for all routes
+app.options('*', cors(corsOptions));
+
+app.use(cors(corsOptions))
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

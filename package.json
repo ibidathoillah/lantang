@@ -28,6 +28,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
     "mocha": "^6.1.4"
   },
   "directories": {
