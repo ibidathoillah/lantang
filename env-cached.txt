@@ -1,0 +1,12 @@
+NODE_ENV=development
+APP_NAME=Lantang
+DB_HOST=XXX
+DB_USERNAME=XXX
+DB_PASSWORD=XXX
+DB_PORT=XXX
+DB_NAME=XXX
+PORT=7000
+________________
+git rm .env.development --cached
+git rm .env.production --cached
+git rm .env.testing --cached
