@@ -49,7 +49,29 @@ const AppSchema = {
 	Users : new Schema({
 			"email":  { type: String, required: true },
 			"password":  { type: String, required: true }
+		}, { versionKey: false }),
+
+	Comment : new Schema({
+			"iduser":  { type: ObjectId, required: true },
+			"description":  { type: String, required: true },
+			"date":  { type: Date, required: true }
+		}, { versionKey: false }),
+
+	Post: new Schema({
+			"image":  { type: ObjectId, required: true },
+			"description":  { type: String, required: true },
+			"id_user":  { type: ObjectId, required: true },
+			"like":  { type: Array, required: true },
+			"comment":  { type: Array, required: true },
+			"date":  { type: Date, required: true }
+			
+		}, { versionKey: false }),
+
+	Category: new Schema({
+			"name":  { type: String, required: true }
+			
 		}, { versionKey: false })
+		
 }
 
 module.exports = AppSchema
