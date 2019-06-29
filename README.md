@@ -1,7 +1,5 @@
 # Lantang Project Wong Batang :smile:
 
-Bank BCA Kurs scrapper for the first step of payfazz recruitment process.
-
 
 ## Installation
 
