@@ -280,9 +280,11 @@ app.delete('/v1/user/:id', (req, res) => {
 app.post('/v1/login', (req, res) => {
 
 	Model.Users.find({email:req.body.email, password:req.body.password}, function (err, user) { 
+
+		console.log(user);
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user)
+		else if(user.length>0)
 			res.status(200).send({ status: 'sukses',  message: 'login sukses' }); // The FIND request was fulfilled
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
