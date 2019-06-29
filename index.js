@@ -31,6 +31,8 @@ app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 /*
 	Lantang API
 */
+
+/* CRUD Users */
 app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
@@ -55,7 +57,36 @@ app.get('/v1/user/:id', (req, res) => {
     } );
 });
 
+app.get('/v1/user/', (req, res) => {
 
+    Model.Users.find({}, function (err, user) { 
+		if(err) 
+			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		else if(user)
+			res.status(200).send(user); // The FIND request was fulfilled
+		else
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+    } );
+});
+
+app.put('/v1/user/:id', (req, res) => {
+
+	Model.Users.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+	})
+});
+
+app.delete('/v1/user/:id', (req, res) => {
+	Model.Users.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+	})
+});
 
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
