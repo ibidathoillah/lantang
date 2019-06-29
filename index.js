@@ -37,12 +37,38 @@ app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
 
-	Users.save((err) => {
-		if(err) 
-			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
-	})
+	Model.Users.find({username:req.body.username}, function(err, user){
+		if (err) {
+			res.status(202).send({ status: 'error',  message: err.message.toString() })
+		}
+		else if(user.length>0){
+			res.status(200).send({status:'username sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+		}
+		else{
+			Model.Users.find({email:req.body.email}, function(err, user){
+			if (err) {
+				res.status(202).send({ status: 'error',  message: err.message.toString() })
+			}
+			else if(user.length>0){
+				res.status(200).send({status:'email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
+			}
+			
+			else{
+				Users.save((err) => {
+				if(err) 
+					res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+				else{
+					var u = Users;
+					res.status(201).send({ data: {id: u._id, username:u.username, emai:u.email}, status: 'success', message: 'New record saved' }); // The request save was fulfilled
+				}
+				})
+			}
+		});
+		
+		}
+	});
+
+	
 });
 
 app.post('/v1/comment/add', (req, res) => {
@@ -53,7 +79,7 @@ app.post('/v1/comment/add', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
+			res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
 	})
 });
 
@@ -65,7 +91,7 @@ app.post('/v1/post/add', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
+			res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
 	})
 });
 
@@ -77,7 +103,7 @@ app.post('/v1/category/add', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'New record saved' }); // The request save was fulfilled
+			res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
 	});
 });
 
@@ -111,7 +137,7 @@ app.put('/v1/post/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+			res.status(201).send({ status: 'success', message: 'Record updated' });
 	})
 });
 
@@ -120,7 +146,7 @@ app.delete('/v1/post/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+			res.status(201).send({ status: 'success', message: 'Record Deleted' });
 	})
 });
 
@@ -161,7 +187,7 @@ app.put('/v1/category/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+			res.status(201).send({ status: 'success', message: 'Record updated' });
 	})
 });
 
@@ -170,7 +196,7 @@ app.delete('/v1/category/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+			res.status(201).send({ status: 'success', message: 'Record Deleted' });
 	})
 });
 
@@ -211,7 +237,7 @@ app.put('/v1/comment/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+			res.status(201).send({ status: 'success', message: 'Record updated' });
 	})
 });
 
@@ -220,7 +246,7 @@ app.delete('/v1/comment/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+			res.status(201).send({ status: 'success', message: 'Record Deleted' });
 	})
 });
 
@@ -254,7 +280,7 @@ app.put('/v1/user/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+			res.status(201).send({ status: 'success', message: 'Record updated' });
 	})
 });
 
@@ -263,7 +289,7 @@ app.delete('/v1/user/:id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
-			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+			res.status(201).send({ status: 'success', message: 'Record Deleted' });
 	})
 });
 
@@ -282,31 +308,6 @@ app.post('/v1/login', (req, res) => {
     } );
 });
 
-app.post('/v1/register/', (req, res) => {
-	Model.Users.find({username:req.body.username}, function(err, user){
-		if (err) {
-			res.status(202).send({ status: 'error',  message: err.message.toString() })
-		}
-		else if(user.length>0){
-			res.status(200).send({status:'username sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
-		}
-		else{
-			Model.Users.find({email:req.body.email}, function(err, user){
-			if (err) {
-				res.status(202).send({ status: 'error',  message: err.message.toString() })
-			}
-			else if(user.length>0){
-				res.status(200).send({status:'email sudah ada', message:'tolong ganti yang lain'}); // The FIND request was fulfilled
-			}
-			
-			else{
-				res.status(404).send({ status: 'error', message: '404 Not Found' });
-			}
-		});
-		
-		}
-	});
-});
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
 module.exports = app;
