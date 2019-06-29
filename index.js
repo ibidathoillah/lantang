@@ -284,8 +284,8 @@ app.post('/v1/login', (req, res) => {
 		console.log(user);
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user.length>0)
-			res.status(200).send({ data:{id:user._id, emai:user.email}, status: 'sukses',  message: 'login sukses' }); // The FIND request was fulfilled
+		else if(user.length==1)
+			res.status(200).send({ data:{id:user[0]._id, emai:user[0].email}, status: 'sukses',  message: 'login sukses' }); // The FIND request was fulfilled
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
