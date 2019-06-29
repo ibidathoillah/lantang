@@ -105,6 +105,31 @@ app.get('/v1/post/', (req, res) => {
     } );
 });
 
+app.put('/v1/post/:id', (req, res) => {
+
+	Model.Comment.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+	})
+});
+
+app.delete('/v1/post/:id', (req, res) => {
+	Model.Comment.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+	})
+});
+
+
+
+
+
+
+
 app.get('/v1/category/:id', (req, res) => {
 
     Model.Category.find({"_id" : ObjectId(req.params.id)}, function (err, user) { 
@@ -129,6 +154,32 @@ app.get('/v1/category/', (req, res) => {
     } );
 });
 
+
+app.put('/v1/category/:id', (req, res) => {
+
+	Model.Category.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+	})
+});
+
+app.delete('/v1/category/:id', (req, res) => {
+	Model.Category.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+	})
+});
+
+
+
+
+
+
+
 app.get('/v1/comment/:userid', (req, res) => {
 
     Model.Comment.find({"userid" : ObjectId(req.params.userid)}, function (err, user) { 
@@ -152,6 +203,35 @@ app.get('/v1/comment/', (req, res) => {
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
 });
+
+
+app.put('/v1/comment/:id', (req, res) => {
+
+	Model.Comment.updateOne({"_id" : ObjectId(req.params.id)},req.body, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record updated' });
+	})
+});
+
+app.delete('/v1/comment/:id', (req, res) => {
+	Model.Comment.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', data: Kurs, message: 'Record Deleted' });
+	})
+});
+
+
+
+
+
+
+
+
+
 
 app.get('/v1/user/:id', (req, res) => {
 
