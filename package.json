@@ -1,5 +1,5 @@
 {
-  "name": "payfazzchallenge",
+  "name": "lantangproject",
   "version": "1.0.0",
   "description": "For the first step of payfazz recruitment process",
   "main": "index.js",
@@ -29,5 +29,16 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^6.1.4"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibidathoillah/lantang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ibidathoillah/lantang/issues"
+  },
+  "homepage": "https://github.com/ibidathoillah/lantang#readme"
 }
