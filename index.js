@@ -379,6 +379,27 @@ app.post('/v1/post/comment', (req, res) =>{
 	})
 });
 
+app.get('/v1/tot_comment/:post_id', (req, res) => {
+
+	 Model.Comment.find({"id_post" : "post_id"}).count(function (err, res) {
+	     if (err)
+	     	res.status(202).send({ status: 'error', message: err.message.toString() })
+	     
+	     console.log(res)	
+	    
+	 });
+  //   Model.Comment.find({"id_post" : ObjectId(req.params.post_id)}, function (err, user) { 
+		// if(err) 
+		// 	res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		// else if(user){
+		// 	console.log(user);
+		// 	// res.status(200).send();
+		// } // The FIND request was fulfilled
+		// else
+		// 	res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+  //   } ).count();
+});
+
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
 module.exports = app;
 
