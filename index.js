@@ -88,8 +88,8 @@ try
 
 	var base64Data = imageBase64
 	var imageBuffer                      = decodeBase64Image(base64Data);
-	var userUploadedFeedMessagesLocation = './test/';
-
+	var userUploadedFeedMessagesLocation = path.join(__dirname,'./test')
+	
 	var uniqueRandomImageName            = 'image-' + uniqueSHA1String;
 	// This variable is actually an array which has 5 values,
 	// The [1] value is the real image extension
