@@ -9,10 +9,6 @@ const config = require('./config');
 const { Validate, Kurs} = require('./lib');
 const Model = require('./model');
 var ObjectId = require('mongodb').ObjectId; 
-
-
-
-
 /**
 		Middleware to All Route
 */
@@ -37,9 +33,6 @@ app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 */
 
 /* CRUD Users */
-
-
-
 app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
@@ -157,12 +150,6 @@ app.delete('/v1/post/:id', (req, res) => {
 	})
 });
 
-
-
-
-
-
-
 app.get('/v1/category/:id', (req, res) => {
 
     Model.Category.find({"_id" : ObjectId(req.params.id)}, function (err, user) { 
@@ -206,11 +193,6 @@ app.delete('/v1/category/:id', (req, res) => {
 			res.status(201).send({ status: 'success', message: 'Record Deleted' });
 	})
 });
-
-
-
-
-
 
 
 app.get('/v1/comment/:userid', (req, res) => {
@@ -303,13 +285,15 @@ app.delete('/v1/user/:id', (req, res) => {
 
 app.post('/v1/login', (req, res) => {
 
-	Model.Users.find({username:req.body.username, email:req.body.email, password:req.body.password}, function (err, user) { 
+	Model.Users.find({username:req.body.username, email:req.body.email, password:req.body.password, role:req.body.role}, function (err, user) { 
 
 		console.log(user);
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user.length==1)
-			res.status(200).send({ data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login sukses' }); // The FIND request was fulfilled
+		else if(user.length==1 && user[0].role==0)
+			res.status(200).send({ data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login user' }); // The FIND request was fulfilled
+		else if(user.length==1 && user[0].role==1)
+			res.status(200).send({ data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login admin' });
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
