@@ -54,9 +54,10 @@ const AppSchema = {
 		}, { versionKey: false }),
 
 	Comment : new Schema({
-			"iduser":  { type: ObjectId, required: true },
+			"id_post":  { type: ObjectId, required: true },
+			"id_user": { type: ObjectId, required: true},
 			"description":  { type: String, required: true },
-			"date":  { type: Date, required: true }
+			"date":  { type: Date, default: new Date(), required: false }
 		}, { versionKey: false }),
 
 	Post: new Schema({
