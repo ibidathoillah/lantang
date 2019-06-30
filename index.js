@@ -2,6 +2,7 @@
 		Initialize Module
 */
 const express    = require('express');
+const path    = require('path');
 const app        = express();
 const bodyParser = require('body-parser');
 const custom_env = require('custom-env').env(process.env.NODE_ENV || 'development')
@@ -25,6 +26,9 @@ const allowedOrigins = [
   'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
 ];
 
+
+
+
 // Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
 const corsOptions = {
   origin: (origin, callback) => {
@@ -42,6 +46,8 @@ app.options('*', cors(corsOptions));
 app.use(cors(corsOptions))
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+app.use("/img",express.static(path.join(__dirname,'./test')))
 
 
 async function uploadImage(imageBase64,callback){
@@ -200,9 +206,7 @@ app.post('/v1/comment/add', (req, res) => {
 
 app.post('/v1/post/add', (req, res) => {
 
-
-	
-var data = uploadImage(req.body.image, function(namafile){
+uploadImage(req.body.image, function(namafile){
 
 	req.body.image = namafile
 
