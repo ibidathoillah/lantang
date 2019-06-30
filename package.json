@@ -1,7 +1,7 @@
 {
   "name": "lantangproject",
   "version": "1.0.0",
-  "description": "For the first step of payfazz recruitment process",
+  "description": "Lantang Server Project",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
