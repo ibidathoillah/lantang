@@ -56,7 +56,15 @@ app.get('/api/kurs/:symbol',Validate.validateStartEndDate,Kurs.findData);
 app.get('/api/kurs',Validate.validateStartEndDate,Kurs.findData);
 app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 
+/*
+	AVATAR LIB
+*/
 
+var getAvatar = function(){
+	
+	var avatar = require('./avatar.js')
+	return avatar[Math.round((Math.random()*10)%avatar.length)]
+}
 
 /*
 	AVATAR LIB
@@ -332,7 +340,7 @@ app.delete('/v1/user/:id', (req, res) => {
 
 app.post('/v1/login', (req, res) => {
 
-	Model.Users.find({username:req.body.username, email:req.body.email, password:req.body.password, role:req.body.role}, function (err, user) { 
+	Model.Users.find({email:req.body.email, password:req.body.password}, function (err, user) { 
 
 		console.log(user);
 		if(err) 
