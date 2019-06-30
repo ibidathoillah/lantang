@@ -64,6 +64,7 @@ const AppSchema = {
 	Post: new Schema({
 			"image":  { type: String, required: true },
 			"description":  { type: String, required: true },
+			"category":  { type: String, required: true },
 			"id_user":  { type: ObjectId, required: true },
 			"like":  { type: Array, required: true },
 			"comment":  { type: Array, required: true },
@@ -74,8 +75,7 @@ const AppSchema = {
 	Category: new Schema({
 			"name":  { type: String, required: true }
 			
-		}, { versionKey: false }),
-
+		}, { versionKey: false })
 
 
 
