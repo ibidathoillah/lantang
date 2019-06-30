@@ -532,47 +532,53 @@ Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{date_done: new Date(), s
 	
 });
 
-// app.post('/v1/post/like/:id', (req, res) =>{
-// 	var Users = Model.Users(req.body);
-// 	Model.Post.findOne({'_id':ObjectId(req.params.id)}).exec(function(err,user){
-// 		req.body.forEach(function(Users._id) {
-// 			var like = new like(Users._id);
-// 			like.save(function(err){
-// 				if(err) 
-// 				res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-// 			else 
-// 				res.status(201).send({ status: 'success', message: 'user like' })
-// 			});
-// 		});
-// 	});
-// });
+app.get('/v1/post_selesai/', (req, res) => {
 
-	// var Users = Model.Users(req.body);
+    Model.Post.find({"status" : "Seleai"}, function (err, user) { 
+		if(err) 
+			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		else if(user)
+			res.status(200).send(user); // The FIND request was fulfilled
+		else
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+    } );
+});
 
-	// Model.Post.update({'_id':ObjectId(req.params.id)}, {$addToSet: {"like":{$each: Users._id}}}, function(err, user){
-	// 	if(err) 
-	// 		res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-	// 	else 
-	// 		res.status(201).send({ status: 'success', message: 'user like' });
-	// });
+app.get('/v1/post_menunggu/', (req, res) => {
 
-	// router.post('/prevList', (req, res) => {
-	//   User.update({'_id':req.user.id, list: { $elemMatch: { name: req.body.name } } },{  $addToSet: { "list.$.arr": {$each: req.body.arr} } },function(err,data) {
-	//     console.log(data);
-	//     res.send(data)
-	//   });
-	// });
+    Model.Post.find({"status" : "Menunggu"}, function (err, user) { 
+		if(err) 
+			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		else if(user)
+			res.status(200).send(user); // The FIND request was fulfilled
+		else
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+    } );
+});
 
+app.get('/v1/post_diproses/', (req, res) => {
 
-	// var Users = Model.Users(req.body);
+    Model.Post.find({"status" : "Diproses"}, function (err, user) { 
+		if(err) 
+			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		else if(user)
+			res.status(200).send(user); // The FIND request was fulfilled
+		else
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+    } );
+});
 
-	// Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{$set:{"like": Users._id}}, function (err, user){
-	// 	if(err) 
-	// 		res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-	// 	else 
-	// 		res.status(201).send({ status: 'success', message: 'Record updated' });
-	// })
+app.get('/v1/post_ditolak/', (req, res) => {
 
+    Model.Post.find({"status" : "Ditolak"}, function (err, user) { 
+		if(err) 
+			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+		else if(user)
+			res.status(200).send(user); // The FIND request was fulfilled
+		else
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+    } );
+});
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
 module.exports = app;
