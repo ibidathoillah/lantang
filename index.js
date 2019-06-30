@@ -88,7 +88,7 @@ try
 
 	var base64Data = imageBase64
 	var imageBuffer                      = decodeBase64Image(base64Data);
-	var userUploadedFeedMessagesLocation = path.join(__dirname,'./test')
+	var userUploadedFeedMessagesLocation = path.join(__dirname,'./test/')
 	
 	var uniqueRandomImageName            = 'image-' + uniqueSHA1String;
 	// This variable is actually an array which has 5 values,
@@ -106,8 +106,11 @@ try
 	try
 	{
 	require('fs').writeFile(userUploadedImagePath, imageBuffer.data,  
-							function() 
+							function(err) 
 							{
+								if(err) {
+									return console.log(err);
+								}
 
 								callback(uniqueRandomImageName);
 							  console.log('DEBUG - feed:message: Saved to disk image attached by user:', userUploadedImagePath);
