@@ -367,20 +367,20 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
     } );
 });
 
-app.post('/v1/post/like/:id', (req, res) =>{
-	var Users = Model.Users(req.body);
-	Model.Post.findOne({'_id':ObjectId(req.params.id)}).exec(function(err,user){
-		req.body.forEach(function(Users._id) {
-			var like = new like(Users._id);
-			like.save(function(err){
-				if(err) 
-				res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-			else 
-				res.status(201).send({ status: 'success', message: 'user like' })
-			});
-		});
-	});
-});
+// app.post('/v1/post/like/:id', (req, res) =>{
+// 	var Users = Model.Users(req.body);
+// 	Model.Post.findOne({'_id':ObjectId(req.params.id)}).exec(function(err,user){
+// 		req.body.forEach(function(Users._id) {
+// 			var like = new like(Users._id);
+// 			like.save(function(err){
+// 				if(err) 
+// 				res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+// 			else 
+// 				res.status(201).send({ status: 'success', message: 'user like' })
+// 			});
+// 		});
+// 	});
+// });
 
 	// var Users = Model.Users(req.body);
 
