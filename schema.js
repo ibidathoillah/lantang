@@ -72,12 +72,12 @@ const AppSchema = {
 			"image_done": { type: String, required: false},
 			"description_done": {type: String, required: false},
 			"date_done": {type: Date, required: false}
+
 			
 		}, { versionKey: false }),
 
 	Category: new Schema({
 			"name":  { type: String, required: true }
-			
 		}, { versionKey: false }),
 
 
