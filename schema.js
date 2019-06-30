@@ -49,7 +49,8 @@ const AppSchema = {
 	Users : new Schema({
 			"username": {type: String, required: true},
 			"email":  { type: String, required: true },
-			"password":  { type: String, required: true }
+			"password": { type: String, required: true },
+			"role": {type: Number, default: 0, required: false}
 		}, { versionKey: false }),
 
 	Comment : new Schema({
@@ -64,7 +65,7 @@ const AppSchema = {
 			"id_user":  { type: ObjectId, required: true },
 			"like":  { type: Array, required: true },
 			"comment":  { type: Array, required: true },
-			"date":  { type: Date, required: true }
+			"date":  { type: Date,default: new Date(), required: false }
 			
 		}, { versionKey: false }),
 
