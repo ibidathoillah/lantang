@@ -516,12 +516,20 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
 
 app.put('/v1/post/done/:id', (req, res) => {
 
-	Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{date_done: new Date(), status:"Selesai",image_done:req.body.image_done,description_done:req.body.description_done}, function (err, user){
+
+uploadImage(req.body.image_done, function(namafile){
+
+Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{date_done: new Date(), status:"Selesai",image_done:namafile,description_done:req.body.description_done}, function (err, user){
 		if(err) 
 			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 		else 
 			res.status(201).send({ status: 'success', message: 'Record updated' });
 	})
+
+});
+
+
+	
 });
 
 // app.post('/v1/post/like/:id', (req, res) =>{
