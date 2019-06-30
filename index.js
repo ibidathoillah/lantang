@@ -331,7 +331,7 @@ app.post('/v1/login', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user.length==1 && user[0].role==0)
-			res.status(200).send({ avatar: user[0].avatar, data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login user' }); // The FIND request was fulfilled
+			res.status(200).send({data:{id:user[0]._id, username:user[0].username, emai:user[0].email, avatar: user[0].avatar}, status: 'sukses',  message: 'login user' }); // The FIND request was fulfilled
 		else if(user.length==1 && user[0].role==1)
 			res.status(200).send({ avatar: user[0].avatar, data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login admin' });
 		else
