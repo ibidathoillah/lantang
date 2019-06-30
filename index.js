@@ -14,6 +14,7 @@ var ObjectId = require('mongodb').ObjectId;
 		Middleware to All Route
 */
 
+
 const allowedOrigins = [
   'capacitor://localhost',
   'ionic://localhost',
@@ -39,7 +40,7 @@ const corsOptions = {
 app.options('*', cors(corsOptions));
 
 app.use(cors(corsOptions))
-
+app.use(express.limit(100000000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -333,7 +334,7 @@ app.post('/v1/login', (req, res) => {
 		else if(user.length==1 && user[0].role==0)
 			res.status(200).send({data:{id:user[0]._id, username:user[0].username, emai:user[0].email, avatar: user[0].avatar}, status: 'sukses',  message: 'login user' }); // The FIND request was fulfilled
 		else if(user.length==1 && user[0].role==1)
-			res.status(200).send({ avatar: user[0].avatar, data:{id:user[0]._id, username:user[0].username, emai:user[0].email}, status: 'sukses',  message: 'login admin' });
+			res.status(200).send({data:{id:user[0]._id, username:user[0].username, emai:user[0].email, avatar: user[0].avatar}, status: 'sukses',  message: 'login admin' });
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
