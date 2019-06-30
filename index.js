@@ -195,9 +195,9 @@ app.delete('/v1/category/:id', (req, res) => {
 });
 
 
-app.get('/v1/comment/:userid', (req, res) => {
+app.get('/v1/comment/:post_id', (req, res) => {
 
-    Model.Comment.find({"userid" : ObjectId(req.params.userid)}, function (err, user) { 
+    Model.Comment.find({"id_post" : ObjectId(req.params.post_id)}, function (err, user) { 
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user)
@@ -310,6 +310,26 @@ app.get('/v1/post_user/:id', (req, res) => {
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
     } );
+});
+
+app.post('/v1/post/comment', (req, res) =>{
+	var Comment = new Model.Comment(req.body);
+
+	Comment.save((err) => {
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else {
+
+			Model.Post.updateOne({"id_post" : ObjectId(Comment.id_post)},{$push:{comment:Comment._id}}, function (err, user){
+				if(err) 
+					res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+				else 
+					res.status(201).send({ status: 'success', message: 'Record updated' });
+			})
+
+			res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
+		}
+	})
 });
 
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
