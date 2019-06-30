@@ -512,74 +512,20 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
     } );
 });
 
-app.post('/v1/post/like/:id', (req, res) =>{
-
-	var Users = Model.Users(req.body);
-
-	Model.Post.update({'_id':ObjectId(req.params.id)}, {$addToSet: {"like":{$each: Users._id}}}, function(err, user){
-		if(err) 
-			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-		else 
-			res.status(201).send({ status: 'success', message: 'user like' });
-	});
-
-	// router.post('/prevList', (req, res) => {
-	//   User.update({'_id':req.user.id, list: { $elemMatch: { name: req.body.name } } },{  $addToSet: { "list.$.arr": {$each: req.body.arr} } },function(err,data) {
-	//     console.log(data);
-	//     res.send(data)
-	//   });
-	// });
-
-
-	// var Users = Model.Users(req.body);
-
-	// Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{$set:{"like": Users._id}}, function (err, user){
-	// 	if(err) 
-	// 		res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-	// 	else 
-	// 		res.status(201).send({ status: 'success', message: 'Record updated' });
-	// })
-  
-});
-
-app.get('/v1/tot_like/:post_id', (req, res) => {
-	var Users = new Model.Users(req.body);
-
-	Model.Post.find({"id_user" : ObjectId(req.params.id)}, function (err, user) { 
-    	console.log(user);
-		if(err) 
-			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user){
-			Model.Post.find({"like" :  ObjectId(Users._id)}).count(function (err, like) {
-		     	if(err) {
-					res.status(202).send({ status: 'error', message: err.message.toString() })
-		     	}
-				else {
-					res.status(201).send({ status: 'success', count: like });				
-		 		}
-			 });
-			res.status(200).send(user); // The FIND request was fulfilled
-		}
-		else{
-			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
-		}
-    } );
-});
-
-app.post('/v1/post/like/:id', (req, res) =>{
-	var Users = Model.Users(req.body);
-	Model.Post.findOne({'_id':ObjectId(req.params.id)}).exec(function(err,user){
-		req.body.forEach(function(Users._id) {
-			var like = new like(Users._id);
-			like.save(function(err){
-				if(err) 
-				res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
-			else 
-				res.status(201).send({ status: 'success', message: 'user like' })
-			});
-		});
-	});
-});
+// app.post('/v1/post/like/:id', (req, res) =>{
+// 	var Users = Model.Users(req.body);
+// 	Model.Post.findOne({'_id':ObjectId(req.params.id)}).exec(function(err,user){
+// 		req.body.forEach(function(Users._id) {
+// 			var like = new like(Users._id);
+// 			like.save(function(err){
+// 				if(err) 
+// 				res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+// 			else 
+// 				res.status(201).send({ status: 'success', message: 'user like' })
+// 			});
+// 		});
+// 	});
+// });
 
 	// var Users = Model.Users(req.body);
 
