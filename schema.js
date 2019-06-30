@@ -71,8 +71,7 @@ const AppSchema = {
 	Category: new Schema({
 			"name":  { type: String, required: true }
 			
-		}, { versionKey: false }),
-
+		}, { versionKey: false })
 
 
 
