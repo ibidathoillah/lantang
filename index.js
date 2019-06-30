@@ -327,7 +327,7 @@ app.delete('/v1/category/:id', (req, res) => {
 
 app.get('/v1/comment/:post_id', (req, res) => {
 
-    Model.Comment.find({"id_post" : ObjectId(req.params.post_id)}, function (err, user) { 
+    Model.Comment.find({"id_post" : ObjectId(req.params.post_id)}).sort({date:'desc'}).exec(function(err, user){
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(user)
