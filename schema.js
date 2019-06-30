@@ -64,18 +64,22 @@ const AppSchema = {
 	Post: new Schema({
 			"image":  { type: String, required: true },
 			"description":  { type: String, required: true },
-			"category":  { type: String, required: true },
 			"id_user":  { type: ObjectId, required: true },
 			"like":  { type: Array, required: true },
 			"comment":  { type: Array, required: true },
-			"date":  { type: Date,default: new Date(), required: false }
+			"date":  { type: Date,default: new Date(), required: false },
+			"status": { type: String, default:"Menunggu", required: false},
+			"image_done": { type: String, required: false},
+			"description_done": {type: String, required: false},
+			"date_done": {type: Date, required: false}
+
 			
 		}, { versionKey: false }),
 
 	Category: new Schema({
 			"name":  { type: String, required: true }
-			
-		}, { versionKey: false })
+		}, { versionKey: false }),
+
 
 
 

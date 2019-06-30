@@ -224,6 +224,7 @@ app.post('/v1/comment/add', (req, res) => {
 
 app.post('/v1/post/add', (req, res) => {
 
+
 uploadImage(req.body.image, function(namafile){
 
 	req.body.image = namafile
@@ -510,6 +511,17 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
 		}
     } );
+});
+
+
+app.put('/v1/post/done/:id', (req, res) => {
+
+	Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{date_done: new Date(), status:"Selesai",image_done:req.body.image_done,description_done:req.body.description_done}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', message: 'Record updated' });
+	})
 });
 
 // app.post('/v1/post/like/:id', (req, res) =>{
