@@ -10,6 +10,12 @@ const { Validate, Kurs} = require('./lib');
 const Model = require('./model');
 const cors = require('cors');
 var ObjectId = require('mongodb').ObjectId; 
+
+
+
+
+
+
 /**
 		Middleware to All Route
 */
@@ -43,6 +49,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+
+
 /**
 		Rest API
 */
@@ -60,6 +68,9 @@ app.delete('/api/kurs/:date',Validate.validateDate, Kurs.delete);
 */
 
 /* CRUD Users */
+
+
+
 app.post('/v1/user/add', (req, res) => {
 
 	var Users = new Model.Users(req.body);
