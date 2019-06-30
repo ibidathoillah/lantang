@@ -580,7 +580,7 @@ app.get('/v1/post_ditolak/', (req, res) => {
     } );
 });
 
-app.put('/v1/post/:id', (req, res) => {
+app.put('/v1/post/status/:id', (req, res) => {
 
 	Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{status:req.body.status}, function (err, user){
 		if(err) 
