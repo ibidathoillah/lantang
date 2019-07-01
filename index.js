@@ -580,6 +580,16 @@ app.get('/v1/post_ditolak/', (req, res) => {
     } );
 });
 
+app.put('/v1/post/status/:id', (req, res) => {
+
+	Model.Post.updateOne({"_id" : ObjectId(req.params.id)},{status:req.body.status}, function (err, user){
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', message: 'Record updated' });
+	})
+});
+
 app.listen(config.server.port, () => console.log(`${config.app_name} (${config.mode}) listening on port ${config.server.port}!`))
 module.exports = app;
 
