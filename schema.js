@@ -62,14 +62,14 @@ const AppSchema = {
 		}, { versionKey: false }),
 
 	Post: new Schema({
-			"image":  { type: String, required: true },
+			"image":  { type: Array, required: true },
 			"description":  { type: String, required: true },
 			"id_user":  { type: ObjectId, required: true },
 			"like":  { type: Array, required: true },
 			"comment":  { type: Array, required: true },
 			"date":  { type: Date,default: new Date(), required: false },
 			"status": { type: String, default:"Menunggu", required: false},
-			"image_done": { type: String, required: false},
+			"image_done": { type: Array, required: false},
 			"description_done": {type: String, required: false},
 			"date_done": {type: Date, required: false}
 
