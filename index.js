@@ -495,7 +495,7 @@ app.post('/v1/login', (req, res) => {
 
 app.get('/v1/post_user/:id', (req, res) => {
 
-    Model.Post.find({"id_user" : ObjectId(req.params.id)}, function (err, user) { 
+    Model.Post.find({"id_user" : ObjectId(req.params.id)}).sort({date:'desc'}).exec(function(err, user){
     	console.log(user);
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
