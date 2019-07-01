@@ -246,7 +246,7 @@ app.post('/v1/user/add', (req, res) => {
 					res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 				else{
 					var u = Users;
-					res.status(201).send({ data: {id: u._id, username:u.username, emai:u.email, avatar: u.avatar}, status: 'success', message: 'New record saved' }); // The request save was fulfilled
+					res.status(201).send({ data: {id: u._id, username:u.username, emai:u.email, avatar: u.avatar, role: u.role}, status: 'success', message: 'New record saved' }); // The request save was fulfilled
 				}
 				})
 			}
