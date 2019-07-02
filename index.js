@@ -542,10 +542,9 @@ app.post('/v1/post/comment', (req, res) =>{
 				if(err) 
 					res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
 				else 
-					res.status(201).send({ status: 'success', message: 'Record updated' });
+					res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
 			})
 
-			res.status(201).send({ status: 'success', message: 'New record saved' }); // The request save was fulfilled
 		}
 	})
 });
