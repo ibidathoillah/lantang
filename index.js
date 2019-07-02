@@ -314,12 +314,24 @@ app.get('/v1/post/:id', (req, res) => {
 });
 
 app.get('/v1/post/', (req, res) => {
-
-	Model.Post.find({}).sort({date:'desc'}).exec(function(err, user){
+	
+	Model.Post.find({}).sort({date:'desc'}).exec(function(err, post){
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user)
-			res.status(200).send(user); // The FIND request was fulfilled
+		else if(post){
+			res.status(200).send(post); // The FIND request was fulfilled
+		
+			
+			Model.Users.find({"_id" : ObjectId(req.params.id)}, function (err, user) { 
+				if(err) 
+					res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
+				else if(user){
+					post.user = user
+					res.status(200).send(post); // The FIND request was fulfilled
+				}else
+					res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
+			} );
+		}
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); 
 	}); 
