@@ -322,7 +322,7 @@ app.get('/v1/post/', (req, res) => {
 			res.status(200).send(post); // The FIND request was fulfilled
 		
 			
-			Model.Users.find({"_id" : ObjectId(req.params.id)}, function (err, user) { 
+			Model.Users.find({"_id" : ObjectId(post.user_id)}, function (err, user) { 
 				if(err) 
 					res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 				else if(user){
