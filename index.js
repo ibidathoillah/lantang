@@ -448,6 +448,19 @@ app.put('/v1/comment/:id', (req, res) => {
 	})
 });
 
+app.put('/v1/liked/:post_id/:user_id', (req, res) => {
+
+	Model.Post.updateOne({"_id" : ObjectId(req.params.post_id), like:  {  $ne : req.params.user_id  }  },{$push:{like:req.params.user_id}}, function (err, user){
+		
+		console.log(user)
+		if(err) 
+			res.status(202).send({ status: 'error', message: err.message.toString() }) // You accepted the CREATE request, but the resource can't be created
+		else 
+			res.status(201).send({ status: 'success', message: 'Record updated' });
+	})
+});
+
+
 app.delete('/v1/comment/:id', (req, res) => {
 	Model.Comment.deleteOne({"_id" : ObjectId(req.params.id)}, function (err, user){
 		if(err) 
