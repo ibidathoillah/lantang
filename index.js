@@ -576,7 +576,6 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
 					res.status(201).send({ status: 'success', count: like });				
 		 		}
 			 });
-			res.status(200).send(user); // The FIND request was fulfilled
 		}
 		else{
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
