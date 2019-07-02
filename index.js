@@ -315,20 +315,21 @@ app.get('/v1/post/:id', (req, res) => {
 
 app.get('/v1/post/', (req, res) => {
 	
-	Model.Post.find({}).sort({date:'desc'}).exec(function(err, post){
-		if(err) 
+	Model.Post.aggregate([
+		{ $lookup:
+		   {
+			 from: 'users',
+			 localField: 'id_user',
+			 foreignField: '_id',
+			 as: 'user'
+		   }
+		 }
+		]).sort({date:'desc'}).exec(function(err, post){
+			if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(post){
 		
-			Model.Users.find({"_id" : ObjectId(post.user_id)}, function (err, user) { 
-				if(err) 
-					res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-				else if(user){
-					post.user = user
-					res.status(200).send(post); // The FIND request was fulfilled
-				}else
-					res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
-			} );
+			res.status(200).send(post); // The FIND request was fulfilled
 		}
 		else
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); 
@@ -401,14 +402,27 @@ app.delete('/v1/category/:id', (req, res) => {
 
 app.get('/v1/comment/:post_id', (req, res) => {
 
-    Model.Comment.find({"id_post" : ObjectId(req.params.post_id)}).sort({date:'desc'}).exec(function(err, user){
-		if(err) 
+
+	Model.Comment.aggregate([
+		{ $lookup:
+		   {
+			 from: 'users',
+			 localField: 'id_user',
+			 foreignField: '_id',
+			 as: 'user'
+		   }
+		 }
+		 ,{'$match':{"id_post" : ObjectId(req.params.post_id) }
+		}]).sort({date:'desc'}).exec(function(err, post){
+			if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user)
-			res.status(200).send(user); // The FIND request was fulfilled
+		else if(post){
+		
+			res.status(200).send(post); // The FIND request was fulfilled
+		}
 		else
-			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
-    } );
+			res.status(404).send({ status: 'error', message: '404 Not Found' }); 
+	}); 
 });
 
 app.get('/v1/comment/', (req, res) => {
