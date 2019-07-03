@@ -580,7 +580,7 @@ app.get('/v1/tot_like/:post_id', (req, res) => {
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
 		else if(post){
-			res.status(201).send({ status: 'success', count: post[0].like.length });	
+			res.status(201).send({ status: 'success', count: post[0].like });	
 		}
 		else{
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
