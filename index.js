@@ -458,7 +458,7 @@ app.put('/v1/liked/:post_id/:user_id', (req, res) => {
 
 app.put('/v1/unliked/:post_id/:user_id', (req, res) => {
 
-	Model.Post.updateOne({"_id" : ObjectId(req.params.post_id), like:  {  $ne : req.params.user_id  }  },{$pull:{like:req.params.user_id}}, function (err, user){
+	Model.Post.updateOne({"_id" : ObjectId(req.params.post_id), like:   req.params.user_id  },{$pull:{like:req.params.user_id}}, function (err, user){
 		
 		console.log(user)
 		if(err) 
