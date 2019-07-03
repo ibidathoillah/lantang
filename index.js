@@ -574,21 +574,13 @@ app.get('/v1/tot_comment/:post_id', (req, res) => {
 });
 
 app.get('/v1/tot_like/:post_id', (req, res) => {
-	var Users = new Model.Users(req.body);
 
-	Model.Post.find({"id_user" : ObjectId(req.params.id)}, function (err, user) { 
-    	console.log(user);
+	Model.Post.find({"_id" : ObjectId(req.params.post_id)}, function (err, post) { 
+    
 		if(err) 
 			res.status(202).send({ status: 'error',  message: err.message.toString() }) // You accepted the UPDATE request, but the resource can't be updated
-		else if(user){
-			Model.Post.find({"like" :  ObjectId(Users._id)}).count(function (err, like) {
-		     	if(err) {
-					res.status(202).send({ status: 'error', message: err.message.toString() })
-		     	}
-				else {
-					res.status(201).send({ status: 'success', count: like });				
-		 		}
-			 });
+		else if(post){
+			res.status(201).send({ status: 'success', count: post[0].like.length });	
 		}
 		else{
 			res.status(404).send({ status: 'error', message: '404 Not Found' }); // No resources found
